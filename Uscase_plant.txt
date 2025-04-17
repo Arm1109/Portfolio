@@ -1,0 +1,31 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+
+:Покупатель: as Act1
+:Банк: as Act2 
+
+rectangle Сайт_интернет_магазина {
+  usecase (Добавить\n товар в корзину) as UC1
+  usecase (Изменить \n количество единиц \n товара в корзине) as UC2
+  usecase (Выбрать \n товары для \n включения в заказ) as UC3
+  usecase (Оформить\n заказ) as UC4
+  usecase (Оплатить заказ) as UC5
+  usecase (Добавление из полноценной \n карточки товара) as UC6
+  usecase (Добавление из краткой \n карточки товара) as UC7
+}
+UC4 .> UC3: extend
+UC4 .> UC1: include
+UC1 .> UC2: extend
+Act1 -- UC1
+Act1 -- UC2
+Act1 -- UC4
+Act1 -- UC5
+
+left to right direction
+UC1 <|-- UC7
+UC1 <|-- UC6
+UC5--Act2
+
+@enduml
